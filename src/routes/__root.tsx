@@ -82,6 +82,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "RoadAid — Emergency Fuel & Vehicle Assistance" },
+      { name: "twitter:description", content: "Request emergency fuel delivery or roadside mechanic help in minutes." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f67704ee-7cde-4632-84dd-fc2821f4def7/id-preview-a3889a64--6a7a0b99-ed90-4f80-8e7d-0586a6fbe584.lovable.app-1778148742472.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f67704ee-7cde-4632-84dd-fc2821f4def7/id-preview-a3889a64--6a7a0b99-ed90-4f80-8e7d-0586a6fbe584.lovable.app-1778148742472.png" },
     ],
     links: [
       {
