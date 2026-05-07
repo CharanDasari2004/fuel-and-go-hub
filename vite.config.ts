@@ -6,7 +6,8 @@ export default defineConfig({
   },
   vite: {
     server: {
-      host: true
+      host: true,
+      allowedHosts: ["fuel-and-go-hub-production.up.railway.app"]
     },
     preview: {
       host: true,
