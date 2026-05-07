@@ -45,11 +45,20 @@ export type Database = {
           customer_id: string
           description: string
           fuel_quantity: number | null
+          fuel_type: string | null
+          full_name: string | null
           id: string
+          landmark: string | null
           location: string
+          otp_code: string | null
+          otp_verified: boolean
+          phone: string | null
+          problem_type: string | null
           status: Database["public"]["Enums"]["request_status"]
           type: Database["public"]["Enums"]["request_type"]
           updated_at: string
+          vehicle_model: string | null
+          vehicle_type: string | null
         }
         Insert: {
           assigned_to?: string | null
@@ -57,11 +66,20 @@ export type Database = {
           customer_id: string
           description?: string
           fuel_quantity?: number | null
+          fuel_type?: string | null
+          full_name?: string | null
           id?: string
+          landmark?: string | null
           location: string
+          otp_code?: string | null
+          otp_verified?: boolean
+          phone?: string | null
+          problem_type?: string | null
           status?: Database["public"]["Enums"]["request_status"]
           type: Database["public"]["Enums"]["request_type"]
           updated_at?: string
+          vehicle_model?: string | null
+          vehicle_type?: string | null
         }
         Update: {
           assigned_to?: string | null
@@ -69,11 +87,20 @@ export type Database = {
           customer_id?: string
           description?: string
           fuel_quantity?: number | null
+          fuel_type?: string | null
+          full_name?: string | null
           id?: string
+          landmark?: string | null
           location?: string
+          otp_code?: string | null
+          otp_verified?: boolean
+          phone?: string | null
+          problem_type?: string | null
           status?: Database["public"]["Enums"]["request_status"]
           type?: Database["public"]["Enums"]["request_type"]
           updated_at?: string
+          vehicle_model?: string | null
+          vehicle_type?: string | null
         }
         Relationships: []
       }
@@ -119,6 +146,8 @@ export type Database = {
         | "on_the_way"
         | "completed"
         | "cancelled"
+        | "reached"
+        | "otp_pending"
       request_type: "fuel" | "mechanic"
     }
     CompositeTypes: {
@@ -254,6 +283,8 @@ export const Constants = {
         "on_the_way",
         "completed",
         "cancelled",
+        "reached",
+        "otp_pending",
       ],
       request_type: ["fuel", "mechanic"],
     },
