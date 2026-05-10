@@ -45,7 +45,8 @@ function DashboardInner() {
         ]
       : role === "provider"
       ? [
-          { to: "/requests", icon: Wrench, title: "Service Queue", desc: "View and accept nearby requests" },
+          { to: "/provider", icon: Wrench, title: "Provider Dashboard", desc: "Nearby requests, active jobs & status updates" },
+          { to: "/requests", icon: ListChecks, title: "Service Queue", desc: "Full list of requests" },
           { to: "/profile", icon: UserIcon, title: "Profile", desc: "Manage your provider profile" },
         ]
       : [

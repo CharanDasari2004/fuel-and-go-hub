@@ -69,7 +69,12 @@ export function AppShell({ children }: { children: ReactNode }) {
               <NavLink to="/requests" icon={ListChecks} label="My Requests" />
             </>
           )}
-          {role === "provider" && <NavLink to="/requests" icon={Wrench} label="Service Queue" />}
+          {role === "provider" && (
+            <>
+              <NavLink to="/provider" icon={LayoutDashboard} label="Provider Dashboard" />
+              <NavLink to="/requests" icon={Wrench} label="Service Queue" />
+            </>
+          )}
           {role === "admin" && (
             <>
               <NavLink to="/requests" icon={ListChecks} label="All Requests" />
