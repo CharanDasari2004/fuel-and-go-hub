@@ -17,6 +17,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VerifyRequestIdRouteImport } from './routes/verify.$requestId'
 import { Route as RequestNewRouteImport } from './routes/request.new'
 import { Route as RequestMechanicRouteImport } from './routes/request.mechanic'
 
@@ -60,6 +61,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VerifyRequestIdRoute = VerifyRequestIdRouteImport.update({
+  id: '/verify/$requestId',
+  path: '/verify/$requestId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RequestNewRoute = RequestNewRouteImport.update({
   id: '/request/new',
   path: '/request/new',
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/request/mechanic': typeof RequestMechanicRoute
   '/request/new': typeof RequestNewRoute
+  '/verify/$requestId': typeof VerifyRequestIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -94,6 +101,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/request/mechanic': typeof RequestMechanicRoute
   '/request/new': typeof RequestNewRoute
+  '/verify/$requestId': typeof VerifyRequestIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/request/mechanic': typeof RequestMechanicRoute
   '/request/new': typeof RequestNewRoute
+  '/verify/$requestId': typeof VerifyRequestIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/request/mechanic'
     | '/request/new'
+    | '/verify/$requestId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/request/mechanic'
     | '/request/new'
+    | '/verify/$requestId'
   id:
     | '__root__'
     | '/'
@@ -145,6 +156,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/request/mechanic'
     | '/request/new'
+    | '/verify/$requestId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -158,6 +170,7 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   RequestMechanicRoute: typeof RequestMechanicRoute
   RequestNewRoute: typeof RequestNewRoute
+  VerifyRequestIdRoute: typeof VerifyRequestIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -218,6 +231,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/verify/$requestId': {
+      id: '/verify/$requestId'
+      path: '/verify/$requestId'
+      fullPath: '/verify/$requestId'
+      preLoaderRoute: typeof VerifyRequestIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/request/new': {
       id: '/request/new'
       path: '/request/new'
@@ -246,7 +266,18 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   RequestMechanicRoute: RequestMechanicRoute,
   RequestNewRoute: RequestNewRoute,
+  VerifyRequestIdRoute: VerifyRequestIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
