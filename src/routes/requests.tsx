@@ -7,7 +7,8 @@ import { NEXT_LABEL, NEXT_STATUS, STATUS_CLASS, STATUS_LABEL } from "@/lib/statu
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { Fuel, Wrench, MapPin, Phone, CheckCircle2, Circle, Clock, Radio } from "lucide-react";
+import { Fuel, Wrench, MapPin, Phone, CheckCircle2, Circle, Clock, Radio, ShieldCheck } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/requests")({
   component: () => (
@@ -211,15 +212,22 @@ function RequestCard({ r, role, userId, onChange, pulse }: any) {
         )}
         {isCustomer && r.status === "otp_pending" && (
           <div className="flex gap-2 items-center flex-wrap">
-            <Input
-              className="w-28"
-              placeholder="Enter OTP"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-            />
-            <Button size="sm" onClick={verifyOtp}>
-              Verify & Complete
+            <Button size="sm" asChild>
+              <Link to="/verify/$requestId" params={{ requestId: r.id }}>
+                <ShieldCheck className="h-4 w-4 mr-1" /> Verify OTP
+              </Link>
             </Button>
+            <div className="flex gap-2 items-center">
+              <Input
+                className="w-28"
+                placeholder="Quick OTP"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+              />
+              <Button size="sm" variant="secondary" onClick={verifyOtp}>
+                Verify
+              </Button>
+            </div>
             <span className="text-xs text-muted-foreground">(Demo OTP: {r.otp_code})</span>
           </div>
         )}
